@@ -31,8 +31,8 @@ export const App = () => {
   };
 
   const checkContactName = values => {
-    const isNameInPhonebook = contacts.find(({ name }) => name === values.name);
-    return isNameInPhonebook;
+    const normalizedName = values.name.toLowerCase();
+    return contacts.find(({ name }) => name.toLowerCase() === normalizedName);
   };
 
   const getFilteredContacts = () => {
@@ -47,8 +47,7 @@ export const App = () => {
   };
 
   const deleteContact = ({ target }) => {
-    const updatedContacts = contacts.filter(({ id }) => id !== target.value);
-    setContacts(updatedContacts);
+    setContacts(prevState => prevState.filter(({ id }) => id !== target.value));
   };
 
   return (
